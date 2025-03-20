@@ -1,0 +1,27 @@
+{
+  "name": "shopifyschema",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TroletProjetDimension/ShopifySchema.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.5",
+    "@graphql-codegen/typescript": "^4.1.5",
+    "@graphql-codegen/typescript-operations": "^4.5.1",
+    "@shopify/api-codegen-preset": "^1.1.5"
+  },
+  "bugs": {
+    "url": "https://github.com/TroletProjetDimension/ShopifySchema/issues"
+  },
+  "homepage": "https://github.com/TroletProjetDimension/ShopifySchema#readme",
+  "description": ""
+}
