@@ -1,0 +1,37 @@
+name: Fetch Shopify Schemas
+
+on:
+  schedule:
+    - cron: "*/20 * * * *" 
+  workflow_dispatch: 
+
+jobs:
+  fetch-schemas:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout types repo
+        uses: actions/checkout@v3
+
+      - name: Install get-graphql-schema
+        run: npm install -g get-graphql-schema
+
+      - name: Fetch Storefront Schema
+        run: |
+          get-graphql-schema https://trolet.ca/api/2025-01/graphql.json \
+          --header "X-Shopify-Storefront-Access-Token: ${{ secrets.STOREFRONT_API_KEY }}" \
+          > ./storefront/storefront-schema.graphql
+
+      - name: Fetch Admin Schema
+        run: |
+          get-graphql-schema https://trolet.ca/admin/api/2025-01/graphql.json \
+          --header "X-Shopify-Access-Token: ${{ secrets.ADMIN_API_KEY }}" \
+          > ./admin/admin-schema.graphql
+
+      - name: Commit & push updated schemas
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add ./storefront/storefront-schema.graphql ./admin/admin-schema.graphql
+          git commit -m "chore: auto-update Shopify schemas [skip ci]" || echo "No schema changes"
+          git push
