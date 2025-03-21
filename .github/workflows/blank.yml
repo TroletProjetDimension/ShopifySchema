@@ -16,8 +16,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Install Graphql-introspection-tool
+        run: npm i -D @graphql-codegen/introspection
+
       - name: Install graphql-code-generator
-        run: npm install -g @graphql-codegen/cli @graphql-codegen/introspection @graphql-codegen/introspection-plugin 
+        run: npm install -g @graphql-codegen/cli
 
       - name: Fetch schemas via graphql-codegen introspection
         env:
