@@ -18,6 +18,7 @@ jobs:
 
       - name: Install dependencies & fix peer deps
         run: |
+          ls
           npm install --legacy-peer-deps
           npm dedupe
 
