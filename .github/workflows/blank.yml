@@ -39,6 +39,6 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add ./storefront/storefront-schema.graphql ./admin/admin-schema.graphql
+          git add ./storefront/storefront-schema.json ./admin/admin-schema.json
           git commit -m "chore: auto-update Shopify schemas [skip ci]" || echo "No schema changes"
           git push
