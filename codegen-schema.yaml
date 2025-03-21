@@ -1,0 +1,19 @@
+schema:
+  - https://trolet.ca/api/2025-01/graphql.json:
+      headers:
+        X-Shopify-Storefront-Access-Token: "${SHOPIFY_STOREFRONT_TOKEN}"
+
+generates:
+  ./storefront/storefront-schema.json:
+    plugins:
+      - introspection
+
+schema:
+  - https://trolet.ca/admin/api/2025-01/graphql.json:
+      headers:
+        X-Shopify-Access-Token: "${SHOPIFY_ADMIN_TOKEN}"
+
+generates:
+  ./admin/admin-schema.json:
+    plugins:
+      - introspection
