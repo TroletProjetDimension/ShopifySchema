@@ -24,16 +24,19 @@ jobs:
       - name: Fetch Storefront Schema
         run: |
           get-graphql-schema https://trolet.ca/api/2025-01/graphql.json \
-          --header "X-Shopify-Storefront-Access-Token: ${{ secrets.STOREFRONT_API_KEY }}" \
-          --json \
-          > ./storefront/storefront-schema.json
+            --header '{"X-Shopify-Storefront-Access-Token": "${{ secrets.STOREFRONT_API_KEY }}"}' \
+            --json \
+            > ./storefront/storefront-schema.json
       
       - name: Fetch Admin Schema
         run: |
           get-graphql-schema https://trolet.ca/admin/api/2025-01/graphql.json \
-          --header "X-Shopify-Access-Token: ${{ secrets.ADMIN_API_KEY }}" \
-          --json \
-          > ./admin/admin-schema.json
+            --header '{"X-Shopify-Access-Token": "${{ secrets.ADMIN_API_KEY }}"}' \
+            --json \
+            > ./admin/admin-schema.json
+
+
+      
 
       - name: TEST
         run: |
