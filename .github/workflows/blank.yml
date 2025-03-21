@@ -20,18 +20,20 @@ jobs:
 
       - name: Install get-graphql-schema
         run: npm install -g get-graphql-schema
-
+        
       - name: Fetch Storefront Schema
         run: |
           get-graphql-schema https://trolet.ca/api/2025-01/graphql.json \
           --header "X-Shopify-Storefront-Access-Token: ${{ secrets.STOREFRONT_API_KEY }}" \
-          > ./storefront/storefront-schema.graphql
-
+          --json \
+          > ./storefront/storefront-schema.json
+      
       - name: Fetch Admin Schema
         run: |
           get-graphql-schema https://trolet.ca/admin/api/2025-01/graphql.json \
           --header "X-Shopify-Access-Token: ${{ secrets.ADMIN_API_KEY }}" \
-          > ./admin/admin-schema.graphql
+          --json \
+          > ./admin/admin-schema.json
 
       - name: Commit & push updated schemas
         run: |
