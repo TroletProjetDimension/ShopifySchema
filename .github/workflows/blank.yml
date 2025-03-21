@@ -1,52 +1,34 @@
-name: Fetch Shopify Schemas
+name: Fetch Shopify Schemas (via graphql-codegen)
 
 on:
   schedule:
-    - cron: "*/20 * * * *" 
-  workflow_dispatch: 
-  
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+
 permissions:
   contents: write
-  
+
 jobs:
   fetch-schemas:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout types repo
+      - name: Checkout repo
         uses: actions/checkout@v3
-        with: 
-          token: ${{secrets.GITHUB_TOKEN}}
 
-      - name: Install get-graphql-schema
-        run: npm install -g get-graphql-schema
-        
-      - name: Fetch Storefront Schema
-        run: |
-          get-graphql-schema https://trolet.ca/api/2025-01/graphql.json \
-            --header '{"X-Shopify-Storefront-Access-Token": "${{ secrets.STOREFRONT_API_KEY }}"}' \
-            --json \
-            > ./storefront/storefront-schema.json
-      
-      - name: Fetch Admin Schema
-        run: |
-          get-graphql-schema https://trolet.ca/admin/api/2025-01/graphql.json \
-            --header '{"X-Shopify-Access-Token": "${{ secrets.ADMIN_API_KEY }}"}' \
-            --json \
-            > ./admin/admin-schema.json
+      - name: Install graphql-code-generator
+        run: npm install -g @graphql-codegen/cli
 
+      - name: Fetch schemas via graphql-codegen introspection
+        env:
+          SHOPIFY_STOREFRONT_TOKEN: ${{ secrets.STOREFRONT_API_KEY }}
+          SHOPIFY_ADMIN_TOKEN: ${{ secrets.ADMIN_API_KEY }}
+        run: graphql-codegen --config codegen-schema.yaml
 
-      
-
-      - name: TEST
-        run: |
-          get-graphql-schema https://trolet.ca/api/2025-01/graphql.json --header "X-Shopify-Storefront-Access-Token: ${{ secrets.STOREFRONT_API_KEY }}" --json --no-comments
-
-
-      - name: Commit & push updated schemas
+      - name: Commit & push schemas
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add ./storefront/storefront-schema.json ./admin/admin-schema.json
-          git commit -m "chore: auto-update Shopify schemas [skip ci]" || echo "No schema changes"
+          git commit -m "chore: fetch Shopify schemas [skip ci]" || echo "no changes"
           git push
