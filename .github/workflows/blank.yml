@@ -19,9 +19,14 @@ jobs:
       - name: Install get-graphql-schema
         run: npm install -g get-graphql-schema
 
+      - name: Install Graphql-introspection-tool
+        run: npm i -D @graphql-codegen/introspection
+
+      - name: Install graphql-code-generator
+        run: npm install -g @graphql-codegen/cli
+
       - name: Install dependencies & fix peer deps
         run: |
-          ls
           npm install --legacy-peer-deps
           npm dedupe
 
