@@ -35,6 +35,11 @@ jobs:
           --json \
           > ./admin/admin-schema.json
 
+      - name: TEST
+        run: |
+          get-graphql-schema https://trolet.ca/api/2025-01/graphql.json --header "X-Shopify-Storefront-Access-Token: ${{ secrets.STOREFRONT_API_KEY }}" --json --no-comments
+
+
       - name: Commit & push updated schemas
         run: |
           git config --global user.name 'github-actions[bot]'
