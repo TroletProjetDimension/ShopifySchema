@@ -1,8 +1,9 @@
+# .github/workflows/fetch-shopify-schemas.yml
 name: Fetch Shopify Schemas (via graphql-codegen)
 
 on:
   schedule:
-    - cron: "*/20 * * * *"
+    - cron: '*/20 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -13,24 +14,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout the repo (with credentials so we can push later)
       - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+          fetch-depth: 0
 
+      # 2. Install Node (so `npm ci` / graphql-codegen works predictably)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # 3. Install dependencies
       - name: Install dependencies & fix peer deps
         run: |
-          npm install --legacy-peer-deps
+          npm ci --legacy-peer-deps
           npm dedupe
 
+      # 4. Run GraphQL introspection
       - name: Fetch schemas via graphql-codegen introspection
         env:
           SHOPIFY_STOREFRONT_TOKEN: ${{ secrets.STOREFRONT_API_KEY }}
           SHOPIFY_ADMIN_TOKEN: ${{ secrets.ADMIN_API_KEY }}
         run: npx graphql-codegen --config codegen-schema.yaml
-        
+
+      # 5. Commit & push only if files changed
       - name: Commit & push schemas
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add ./storefront/storefront-schema.json ./admin/admin-schema.json
-          git commit -m "chore: fetch Shopify schemas [skip ci]" || echo "no changes"
-          git push
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add storefront/storefront-schema.json admin/admin-schema.json
+          if git diff --cached --quiet; then
+            echo "✅ No schema changes detected"
+          else
+            git commit -m "chore: fetch Shopify schemas [skip ci]"
+            git push
+          fi
