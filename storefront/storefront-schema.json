@@ -5962,6 +5962,66 @@
             "deprecationReason": null
           },
           {
+            "name": "PAYMENTS_CREDIT_CARD_BASE_EXPIRED",
+            "description": "Credit card has expired.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PAYMENTS_CREDIT_CARD_BASE_GATEWAY_NOT_SUPPORTED",
+            "description": "Credit card gateway is not supported.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PAYMENTS_CREDIT_CARD_GENERIC",
+            "description": "Credit card error.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PAYMENTS_CREDIT_CARD_MONTH_INCLUSION",
+            "description": "Credit card month is invalid.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PAYMENTS_CREDIT_CARD_NUMBER_INVALID",
+            "description": "Credit card number is invalid.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PAYMENTS_CREDIT_CARD_NUMBER_INVALID_FORMAT",
+            "description": "Credit card number format is invalid.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PAYMENTS_CREDIT_CARD_VERIFICATION_VALUE_BLANK",
+            "description": "Credit card verification value is blank.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PAYMENTS_CREDIT_CARD_VERIFICATION_VALUE_INVALID_FOR_CARD_TYPE",
+            "description": "Credit card verification value is invalid for card type.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PAYMENTS_CREDIT_CARD_YEAR_EXPIRED",
+            "description": "Credit card has expired.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PAYMENTS_CREDIT_CARD_YEAR_INVALID_EXPIRY_YEAR",
+            "description": "Credit card expiry year is invalid.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "PAYMENT_METHOD_NOT_SUPPORTED",
             "description": "The payment method is not supported.",
             "isDeprecated": false,
@@ -8310,6 +8370,18 @@
         "isOneOf": null,
         "fields": [
           {
+            "name": "cart",
+            "description": "The result of cart preparation for completion.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Cart",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "pollAfter",
             "description": "The polling delay.",
             "args": [],
@@ -10345,6 +10417,22 @@
             "deprecationReason": null
           },
           {
+            "name": "defaultLanguage",
+            "description": "The default language for the country.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Language",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "isoCode",
             "description": "The ISO code of the country.",
             "args": [],
@@ -10369,8 +10457,8 @@
               "name": "Market",
               "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "This `market` field will be removed in a future version of the API."
           },
           {
             "name": "name",
@@ -18513,8 +18601,8 @@
                 "ofType": null
               }
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "This `market` field will be removed in a future version of the API."
           }
         ],
         "inputFields": null,
@@ -37850,6 +37938,12 @@
             "deprecationReason": null
           },
           {
+            "name": "REDIRECT_TO_CHECKOUT_REQUIRED",
+            "description": "Redirect to checkout required to complete this action.",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "TAXES_DELIVERY_GROUP_ID_NOT_FOUND",
             "description": null,
             "isDeprecated": false,
@@ -37864,6 +37958,12 @@
           {
             "name": "TAXES_MUST_BE_DEFINED",
             "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "VALIDATION_CUSTOM",
+            "description": "Validation failed.",
             "isDeprecated": false,
             "deprecationReason": null
           }
