@@ -1,7 +1,7 @@
 generates:
   ./storefront/storefront-schema.json:
     schema:
-      - https://trolet.ca/api/2025-01/graphql.json:
+      - https://trolet.ca/api/2025-04/graphql.json:
           headers:
             X-Shopify-Storefront-Access-Token: "${SHOPIFY_STOREFRONT_TOKEN}"
     plugins:
@@ -9,7 +9,7 @@ generates:
 
   ./admin/admin-schema.json:
     schema:
-      - https://trolet.ca/admin/api/2025-01/graphql.json:
+      - https://trolet.ca/admin/api/2025-04/graphql.json:
           headers:
             X-Shopify-Access-Token: "${SHOPIFY_ADMIN_TOKEN}"
     plugins:
