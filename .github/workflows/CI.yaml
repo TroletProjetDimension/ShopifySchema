@@ -30,7 +30,7 @@ jobs:
       # 3. Install dependencies
       - name: Install dependencies & fix peer deps
         run: |
-          npm ci --legacy-peer-deps
+          npm i --legacy-peer-deps
           npm dedupe
 
       # 4. Run GraphQL introspection
