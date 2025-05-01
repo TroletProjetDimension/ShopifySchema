@@ -21,11 +21,11 @@ jobs:
           persist-credentials: true
           fetch-depth: 0
 
-      # 2. Install Node (so `npm ci` / graphql-codegen works predictably)
+      # 2. Install Node 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       # 3. Install dependencies
       - name: Install dependencies & fix peer deps
